@@ -15,11 +15,24 @@ export default async function connection() {
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(uri, {
-      dbName: process.env.MONGODB_DB_NAME ?? "trail",
-    });
+    cached.promise = mongoose
+      .connect(uri, {
+        dbName: process.env.MONGODB_DB_NAME ?? "trail",
+        serverSelectionTimeoutMS: 8000,
+      })
+      .catch((error) => {
+        // Don't cache a failed connection — let the next request retry.
+        cached.promise = null;
+        throw error;
+      });
   }
 
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (error) {
+    cached.promise = null;
+    throw error;
+  }
+
   return cached.conn;
 }
