@@ -15,66 +15,64 @@ const FEATURES = [
   "Share photos, routes, and difficulty ratings",
 ];
 
-const STATS = [
-  { value: "247+", label: "Trails mapped" },
-  { value: "NL-wide", label: "Province coverage" },
-  { value: "Free", label: "Always" },
-];
 
-function TopoBackground() {
+function TrailMapBackground() {
   return (
     <svg
-      className="absolute inset-0 h-full w-full opacity-[0.08]"
+      className="absolute inset-0 h-full w-full opacity-[0.1]"
       viewBox="0 0 480 320"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
+      {/* Map grid */}
+      <g stroke="white" strokeWidth="0.5" opacity="0.25">
+        <path d="M0 64 H480 M0 128 H480 M0 192 H480 M0 256 H480" />
+        <path d="M80 0 V320 M160 0 V320 M240 0 V320 M320 0 V320 M400 0 V320" />
+      </g>
+
+      {/* Elevation contours — top-right hill */}
+      <g fill="none" stroke="white" strokeWidth="1" opacity="0.4">
+        <path d="M300 120 C300 86 360 70 400 92 C436 112 432 158 392 166 C352 174 300 156 300 120 Z" />
+        <path d="M322 122 C322 100 360 90 388 104 C414 117 412 146 384 152 C356 158 322 146 322 122 Z" />
+        <path d="M344 124 C344 112 364 108 378 116 C392 124 388 138 372 140 C358 142 344 134 344 124 Z" />
+      </g>
+
+      {/* Elevation contours — lower-left hill */}
+      <g fill="none" stroke="white" strokeWidth="1" opacity="0.35">
+        <path d="M70 230 C70 204 118 196 146 214 C172 230 166 264 132 268 C100 272 70 258 70 230 Z" />
+        <path d="M92 232 C92 216 122 210 142 222 C160 233 156 252 132 256 C110 259 92 248 92 232 Z" />
+      </g>
+
+      {/* Trail route */}
       <path
-        d="M-20 130 Q100 60 200 100 Q300 140 500 70"
+        d="M28 300 C78 270 58 214 120 204 C176 195 190 246 236 214 C282 184 286 128 346 140 C402 151 408 92 458 66"
         fill="none"
         stroke="white"
-        strokeWidth="1.2"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+        strokeDasharray="1 9"
+        opacity="0.9"
       />
+
+      {/* Waypoints */}
+      <g fill="white">
+        <circle cx="120" cy="204" r="3" opacity="0.6" />
+        <circle cx="236" cy="214" r="3" opacity="0.6" />
+        <circle cx="346" cy="140" r="3" opacity="0.6" />
+      </g>
+
+      {/* Start marker */}
+      <circle cx="28" cy="300" r="6" fill="none" stroke="white" strokeWidth="2" />
+      <circle cx="28" cy="300" r="2" fill="white" />
+
+      {/* End marker — location pin */}
       <path
-        d="M-20 160 Q80 90 200 130 Q330 170 500 100"
+        d="M458 50 C448 50 440 58 440 68 C440 80 458 92 458 92 C458 92 476 80 476 68 C476 58 468 50 458 50 Z"
         fill="none"
         stroke="white"
-        strokeWidth="1.2"
+        strokeWidth="2"
       />
-      <path
-        d="M-20 190 Q90 120 210 155 Q340 195 500 130"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.2"
-      />
-      <path
-        d="M-20 220 Q100 155 220 185 Q350 220 500 160"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.2"
-      />
-      <path
-        d="M-20 260 Q110 200 230 230 Q355 265 500 205"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.2"
-      />
-      <path
-        d="M-20 100 Q110 30 220 70 Q320 110 500 45"
-        fill="none"
-        stroke="white"
-        strokeWidth="1.2"
-      />
-      <circle cx="220" cy="90" r="4" fill="white" opacity="0.5" />
-      <circle cx="310" cy="115" r="3" fill="white" opacity="0.35" />
-      <path
-        d="M220 90 L310 115"
-        stroke="white"
-        strokeWidth="1"
-        strokeDasharray="4 3"
-        opacity="0.4"
-        fill="none"
-      />
+      <circle cx="458" cy="68" r="4" fill="white" />
     </svg>
   );
 }
@@ -116,7 +114,20 @@ function CheckIcon() {
   );
 }
 
-export default function WaitlistLandingPage() {
+export default function WaitlistLandingPage({
+  waitlistCount = 0,
+}: {
+  waitlistCount?: number;
+}) {
+  const stats = [
+    { value: "247+", label: "trails across NL, ready to explore" },
+    {
+      value: waitlistCount.toLocaleString(),
+      label: "hikers already on the waitlist",
+    },
+    { value: "Free", label: "for everyone on the waitlist" },
+  ];
+
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -183,7 +194,7 @@ export default function WaitlistLandingPage() {
         className="relative flex h-screen w-screen flex-col justify-center overflow-hidden px-10"
         style={{ backgroundColor: HERO_DARK }}
       >
-        <TopoBackground />
+        <TrailMapBackground />
 
         <div className="relative z-10 mx-auto w-3/4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -198,10 +209,9 @@ export default function WaitlistLandingPage() {
               className="font-landing-display mt-6 text-5xl leading-[1.12] font-normal tracking-tight sm:text-6xl lg:text-7xl"
               style={{ color: "#f0ebe0" }}
             >
-              Discover{" "}
-              <em className="text-neutral-200">every trail</em>
+              Every trail.
               <br />
-              in the province
+              <em className="text-neutral-200">One community.</em>
             </h1>
 
             <p
@@ -229,12 +239,15 @@ export default function WaitlistLandingPage() {
               className="mt-8 flex gap-7 border-t pt-7"
               style={{ borderColor: "rgba(255,255,255,0.1)" }}
             >
-              {STATS.map(({ value, label }) => (
-                <div key={label}>
+              {stats.map(({ value, label }) => (
+                <div key={label} className="max-w-[120px] flex-1">
                   <p className="text-lg font-medium" style={{ color: "#f0ebe0" }}>
                     {value}
                   </p>
-                  <p className="text-[11px]" style={{ color: "#a3a3a3" }}>
+                  <p
+                    className="mt-0.5 text-[11px] leading-snug"
+                    style={{ color: "#a3a3a3" }}
+                  >
                     {label}
                   </p>
                 </div>
