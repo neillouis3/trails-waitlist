@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--midground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-inter);
+}
+
+:root,
+.light {
+  --background: #ffffff;
+  --midground: #ffffff;
+  --foreground: #18181b;
+  --accent: #2d6a4f;
+  --accent-hover: #1b4332;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background: #ffffff;
+    color: var(--foreground);
+    font-family: inherit;
+  }
+
+  :root,
+  .light,
+  .default,
+  [data-theme="light"],
+  [data-theme="default"] {
+    --background: #ffffff;
+    --surface: #ffffff;
+    --surface-secondary: #ffffff;
+    --surface-tertiary: #ffffff;
+    --background-secondary: #ffffff;
+    --background-tertiary: #ffffff;
+    --overlay: #ffffff;
+    --segment: #ffffff;
+    --default: #ffffff;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Landing page only — serif display headings */
+  .font-landing-display {
+    font-family: Georgia, serif;
+  }
+}

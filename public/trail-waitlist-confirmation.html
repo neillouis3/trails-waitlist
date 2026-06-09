@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>You're on the Trail waitlist</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #eee9df;
+      font-family: 'DM Sans', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 16px;
+    }
+
+    .email-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Pre-header */
+    .preheader {
+      font-size: 0;
+      color: transparent;
+      line-height: 0;
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    /* Top logo bar */
+    .top-bar {
+      text-align: center;
+      padding-bottom: 28px;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: #1a3d2b;
+      border-radius: 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+
+    .logo-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #1a3d2b;
+      letter-spacing: -0.01em;
+      vertical-align: middle;
+    }
+
+    /* Hero card */
+    .hero-card {
+      background: #1a3d2b;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-inner {
+      padding: 48px 44px 44px;
+      position: relative;
+    }
+
+    .topo-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      width: 100%;
+      height: 100%;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.1);
+      border: 0.5px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 11px;
+      color: #a8d5b5;
+      margin-bottom: 24px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #52b07a;
+      display: inline-block;
+    }
+
+    .hero-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #f0ebe0;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero-heading em {
+      font-style: italic;
+      color: #7ecfa0;
+    }
+
+    .hero-body {
+      font-size: 14px;
+      color: #7ea88f;
+      line-height: 1.75;
+      font-weight: 300;
+      max-width: 400px;
+    }
+
+    /* Stats strip */
+    .stats-strip {
+      display: flex;
+      border-top: 0.5px solid rgba(255,255,255,0.1);
+      margin-top: 36px;
+      padding-top: 28px;
+      gap: 0;
+    }
+
+    .stat-item {
+      flex: 1;
+    }
+
+    .stat-item + .stat-item {
+      border-left: 0.5px solid rgba(255,255,255,0.08);
+      padding-left: 24px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: 500;
+      color: #f0ebe0;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #5d8a6f;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Body card */
+    .body-card {
+      background: #f5f2eb;
+      border-radius: 16px;
+      padding: 40px 44px;
+      margin-top: 12px;
+    }
+
+    .body-card h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #1a2e1f;
+      margin-bottom: 12px;
+    }
+
+    .body-card p {
+      font-size: 14px;
+      color: #4a5e50;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .divider {
+      height: 0.5px;
+      background: #d8d0c0;
+      margin: 28px 0;
+    }
+
+    /* What's coming list */
+    .coming-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #2d6a4f;
+      letter-spacing: 0.04em;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #3d5c48;
+      line-height: 1.5;
+    }
+
+    .check-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(82,176,122,0.18);
+      border: 0.5px solid rgba(82,176,122,0.45);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* CTA button */
+    .cta-wrap {
+      text-align: center;
+      margin: 32px 0 8px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: #1a3d2b;
+      color: #d4edda !important;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'DM Sans', Arial, sans-serif;
+      padding: 13px 28px;
+      border-radius: 9px;
+      letter-spacing: 0.01em;
+    }
+
+    .cta-note {
+      font-size: 11px;
+      color: #a39b88;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 28px 0 8px;
+    }
+
+    .footer p {
+      font-size: 11px;
+      color: #a39b88;
+      line-height: 1.7;
+    }
+
+    .footer a {
+      color: #2d6a4f;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <span class="preheader">You're on the Trail waitlist — we'll let you know the moment we launch in Newfoundland & Labrador.</span>
+
+  <div class="email-wrap">
+
+    <!-- Logo -->
+    <div class="top-bar">
+      <div class="logo-mark">
+        <span class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+            <path d="M3 15 L8 7 L12 11 L15 6 L17 9" stroke="#7ecfa0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="15" cy="6" r="2" fill="#52b07a"/>
+          </svg>
+        </span>
+        <span class="logo-name">Trail</span>
+      </div>
+    </div>
+
+    <!-- Hero card -->
+    <div class="hero-card">
+      <div class="hero-inner">
+        <svg class="topo-bg" viewBox="0 0 560 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <path d="M-20 100 Q120 40 240 80 Q360 120 580 55" fill="none" stroke="white" stroke-width="1.2"/>
+          <path d="M-20 135 Q100 70 230 110 Q370 150 580 85" fill="none" stroke="white" stroke-width="1.2"/>
+          <path d="M-20 170 Q110 105 240 140 Q375 178 580 115" fill="none" stroke="white" stroke-width="1.2"/>
+          <path d="M-20 205 Q115 145 245 175 Q378 210 580 150" fill="none" stroke="white" stroke-width="1.2"/>
+          <path d="M-20 240 Q120 185 248 210 Q380 242 580 185" fill="none" stroke="white" stroke-width="1.2"/>
+          <path d="M-20 65 Q130 10 250 50 Q365 88 580 25" fill="none" stroke="white" stroke-width="1.2"/>
+          <circle cx="240" cy="80" r="4" fill="white" opacity="0.5"/>
+          <circle cx="340" cy="108" r="3" fill="white" opacity="0.35"/>
+          <path d="M240 80 L340 108" stroke="white" stroke-width="1" stroke-dasharray="4 3" opacity="0.4" fill="none"/>
+        </svg>
+
+        <div class="badge">
+          <span class="badge-dot"></span>
+          You're on the list
+        </div>
+
+        <div class="hero-heading">
+          See you on<br />
+          <em>the trails</em>
+        </div>
+
+        <p class="hero-body">
+          Thanks for signing up — you're now on the Trail waitlist. We're building something for hikers right here in Newfoundland & Labrador, and you'll be among the first to know when we open the doors.
+        </p>
+
+        <div class="stats-strip">
+          <div class="stat-item">
+            <span class="stat-value">247+</span>
+            <span class="stat-label">Trails mapped</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">NL-wide</span>
+            <span class="stat-label">Province coverage</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">Free</span>
+            <span class="stat-label">Always</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body card -->
+    <div class="body-card">
+      <h2>What's coming your way</h2>
+      <p>
+        Trail is a social app built specifically for hikers across the province. Here's what you'll get access to when we launch:
+      </p>
+
+      <div class="divider"></div>
+
+      <span class="coming-label">Features</span>
+
+      <ul class="feature-list">
+        <li>
+          <span class="check-icon">
+            <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4L3.5 6.5L9 1" stroke="#52b07a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Map 247+ NL trails and log every hike you complete
+        </li>
+        <li>
+          <span class="check-icon">
+            <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4L3.5 6.5L9 1" stroke="#52b07a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Follow local hikers and build a feed of trails near you
+        </li>
+        <li>
+          <span class="check-icon">
+            <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
+              <path d="M1 4L3.5 6.5L9 1" stroke="#52b07a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          Share photos, routes, and difficulty ratings with the community
+        </li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <p style="color:#6b7c71; font-size:13px;">
+        We'll send you one email when Trail is ready — no spam, no newsletters, no noise. Just the launch.
+      </p>
+
+      <div class="cta-wrap">
+        <a href="https://trailnl.ca" class="cta-btn">Visit trailnl.ca</a>
+      </div>
+      <p class="cta-note">In the meantime, share Trail with a fellow hiker.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>
+        You're receiving this because you signed up at trailnl.ca.<br />
+        <a href="https://trailnl.ca/unsubscribe">Unsubscribe</a> · Trail, Newfoundland & Labrador, Canada
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>
