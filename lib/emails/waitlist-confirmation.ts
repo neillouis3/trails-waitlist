@@ -20,7 +20,7 @@ function getBaseUrl() {
 }
 
 function getFromAddress() {
-  return process.env.WAITLIST_FROM_EMAIL ?? "NexTrails <onboarding@resend.dev>";
+  return process.env.WAITLIST_FROM_EMAIL ?? "NexTrails <waitlist@nextrails.ca>";
 }
 
 function getSubject() {
