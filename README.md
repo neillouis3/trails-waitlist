@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NexTrails — Waitlist
 
-## Getting Started
+Standalone Next.js app for the **NexTrails** waitlist: a landing page, a signup API, MongoDB storage, and Resend confirmation emails. NexTrails is a social platform for hikers across Newfoundland & Labrador.
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # then fill in the values
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable | Required | Description |
+| --- | --- | --- |
+| `MONGODB_URI` | Yes | MongoDB Atlas connection string. Signups are stored in the `waitlist` collection. |
+| `MONGODB_DB_NAME` | No | Database name (defaults to `trail`). |
+| `RESEND_API_KEY` | For emails | Resend API key. If unset, signups still save but no confirmation email is sent. |
+| `WAITLIST_FROM_EMAIL` | For emails | Verified sender, e.g. `NexTrails <hello@yourdomain.com>`. The `onboarding@resend.dev` default only delivers to your own Resend account email. |
+| `APP_BASE_URL` | Recommended | Deployed URL, used for links in the confirmation email. |
+| `RESEND_WAITLIST_TEMPLATE_ID` | No | Resend template ID. Falls back to the built-in HTML email if unset. |
+| `WAITLIST_EMAIL_SUBJECT` | No | Overrides the default email subject. |
+| `WAITLIST_EMAIL_LOGO_URL` | No | Logo shown in the confirmation email. |
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Push to GitHub and import the repo into [Vercel](https://vercel.com/new). Vercel auto-detects Next.js — no extra config needed. Add the environment variables above under **Settings → Environment Variables**. The minimum to go live is `MONGODB_URI`.

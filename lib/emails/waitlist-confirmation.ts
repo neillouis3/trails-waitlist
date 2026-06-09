@@ -20,11 +20,11 @@ function getBaseUrl() {
 }
 
 function getFromAddress() {
-  return process.env.WAITLIST_FROM_EMAIL ?? "Trail <onboarding@resend.dev>";
+  return process.env.WAITLIST_FROM_EMAIL ?? "NexTrails <onboarding@resend.dev>";
 }
 
 function getSubject() {
-  return process.env.WAITLIST_EMAIL_SUBJECT ?? "You're on the Trail waitlist";
+  return process.env.WAITLIST_EMAIL_SUBJECT ?? "You're on the NexTrails waitlist";
 }
 
 function getTemplateVariables(name?: string): Record<string, string> {
@@ -76,17 +76,17 @@ function buildHtml({ name }: WaitlistConfirmationParams) {
   <body>
     <div class="wrap">
       <div class="logo">
-        <img src="${logoUrl}" alt="Trail" />
+        <img src="${logoUrl}" alt="NexTrails" />
       </div>
       <div class="card">
         <div class="hero">
           <h1>The trails are <em>waiting</em></h1>
-          <p>You're on the Trail waitlist for Newfoundland &amp; Labrador.</p>
+          <p>You're on the NexTrails waitlist for Newfoundland &amp; Labrador.</p>
         </div>
         <div class="body">
           <p>${greeting}</p>
           <p>Thanks for signing up. We're building a social platform for hikers — map routes, share adventures, and find your next hike.</p>
-          <p>We'll email you when early access opens. No spam, just a note when Trail is ready.</p>
+          <p>We'll email you when early access opens. No spam, just a note when NexTrails is ready.</p>
         </div>
         <div class="footer">
           <p>Already have access? <a href="${baseUrl}/login">Sign in</a></p>
@@ -103,13 +103,13 @@ function buildText({ name }: WaitlistConfirmationParams) {
 
   return `${greeting}
 
-You're on the Trail waitlist for Newfoundland & Labrador.
+You're on the NexTrails waitlist for Newfoundland & Labrador.
 
 Thanks for signing up. We'll email you when early access opens.
 
 Sign in if you already have access: ${getBaseUrl()}/login
 
-— The Trail team`;
+— The NexTrails team`;
 }
 
 async function sendHtmlEmail(

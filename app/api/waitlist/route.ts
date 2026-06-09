@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       emailSent: emailResult.sent,
       message: emailResult.sent
         ? "You're on the list. Check your inbox for a confirmation email."
-        : "You're on the list. We'll email you when Trail opens up.",
+        : "You're on the list. We'll email you when NexTrails opens up.",
       ...(isDev && emailResult.error ? { emailError: emailResult.error } : {}),
     });
   } catch (error) {

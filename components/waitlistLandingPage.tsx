@@ -166,7 +166,7 @@ export default function WaitlistLandingPage() {
       }
 
       setSuccessMessage(
-        data.message ?? "You're on the list. We'll email you when Trail opens."
+        data.message ?? "You're on the list. We'll email you when NexTrails opens."
       );
       setEmail("");
       setName("");
@@ -187,7 +187,7 @@ export default function WaitlistLandingPage() {
 
         <div className="relative z-10 mx-auto w-3/4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/trail.png" alt="Trail" className="mb-5 h-11 w-auto" />
+            <img src="/trail.png" alt="NexTrails" className="mb-5 h-11 w-auto" />
 
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-normal text-neutral-300">
               <PulseDot />
@@ -298,7 +298,7 @@ export default function WaitlistLandingPage() {
       >
         <div className="mx-auto w-3/4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/trail.png" alt="Trail" className="mb-6 h-12 w-auto" />
+          <img src="/trail.png" alt="NexTrails" className="mb-6 h-12 w-auto" />
 
           <h2
             className="font-landing-display text-[22px] font-normal"
@@ -310,7 +310,7 @@ export default function WaitlistLandingPage() {
             className="mt-1.5 mb-7 text-[13px] leading-relaxed"
             style={{ color: "#6b7c71" }}
           >
-            Be among the first hikers to access Trail when it launches.
+            Be among the first hikers to access NexTrails when it launches.
           </p>
 
           <div className="mb-6 h-px" style={{ backgroundColor: "#d8d0c0" }} />
