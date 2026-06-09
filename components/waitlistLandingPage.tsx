@@ -235,10 +235,7 @@ export default function WaitlistLandingPage({
               ))}
             </ul>
 
-            <div
-              className="mt-8 flex gap-7 border-t pt-7"
-              style={{ borderColor: "rgba(255,255,255,0.1)" }}
-            >
+            <div className="mt-8 flex gap-7">
               {stats.map(({ value, label }) => (
                 <div key={label} className="max-w-[120px] flex-1">
                   <p className="text-lg font-medium" style={{ color: "#f0ebe0" }}>
