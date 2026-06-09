@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { Button, Input, Label, TextField } from "@heroui/react";
 
@@ -419,17 +418,6 @@ export default function WaitlistLandingPage({
               </Button>
             </form>
           )}
-
-          <p className="mt-5 text-center text-xs" style={{ color: "#8a9e90" }}>
-            Already have access?{" "}
-            <Link
-              href="/login"
-              className="font-medium hover:underline"
-              style={{ color: ACCENT }}
-            >
-              Sign in →
-            </Link>
-          </p>
         </div>
       </section>
     </div>

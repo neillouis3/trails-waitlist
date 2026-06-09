@@ -5,6 +5,23 @@ import Waitlist from "@/lib/models/waitlist";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+export async function GET() {
+  try {
+    await connection();
+    const count = await Waitlist.countDocuments();
+    return NextResponse.json({ ok: true, count });
+  } catch (error) {
+    console.error("Waitlist count failed:", error);
+    return NextResponse.json(
+      {
+        ok: false,
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as { email?: string; name?: string };
