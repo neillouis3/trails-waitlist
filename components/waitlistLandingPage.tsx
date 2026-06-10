@@ -121,7 +121,7 @@ export default function WaitlistLandingPage({
   const stats = [
     { value: "247+", label: "trails across NL, ready to explore" },
     {
-      value: waitlistCount.toLocaleString(),
+      value: (waitlistCount + 100).toLocaleString(),
       label: "hikers already on the waitlist",
     },
     { value: "Free", label: "for everyone on the waitlist" },
@@ -188,14 +188,14 @@ export default function WaitlistLandingPage({
   };
 
   return (
-    <div className="flex w-screen flex-col font-sans">
+    <div className="flex w-full flex-col font-sans">
       <section
-        className="relative flex h-screen w-screen flex-col justify-center overflow-hidden px-10"
+        className="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden px-6 py-16 sm:px-8 md:px-10"
         style={{ backgroundColor: HERO_DARK }}
       >
         <TrailMapBackground />
 
-        <div className="relative z-10 mx-auto w-3/4">
+        <div className="relative z-10 mx-auto w-full max-w-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/trail.png" alt="NexTrails" className="mb-5 h-11 w-auto" />
 
@@ -205,7 +205,7 @@ export default function WaitlistLandingPage({
             </span>
 
             <h1
-              className="font-landing-display mt-6 text-5xl leading-[1.12] font-normal tracking-tight sm:text-6xl lg:text-7xl"
+              className="font-landing-display mt-6 text-4xl leading-[1.12] font-normal tracking-tight sm:text-6xl lg:text-7xl"
               style={{ color: "#f0ebe0" }}
             >
               Every trail.
@@ -234,9 +234,9 @@ export default function WaitlistLandingPage({
               ))}
             </ul>
 
-            <div className="mt-8 flex gap-7">
+            <div className="mt-8 flex flex-wrap gap-5 sm:gap-7">
               {stats.map(({ value, label }) => (
-                <div key={label} className="max-w-[120px] flex-1">
+                <div key={label} className="min-w-[90px] max-w-[120px] flex-1">
                   <p className="text-lg font-medium" style={{ color: "#f0ebe0" }}>
                     {value}
                   </p>
@@ -250,10 +250,10 @@ export default function WaitlistLandingPage({
               ))}
             </div>
 
-            <div className="mt-8 flex gap-2.5">
+            <div className="mt-8 flex flex-col gap-2.5 sm:flex-row">
               <Button
                 onPress={scrollToWaitlist}
-                className="h-11 gap-2 font-medium"
+                className="h-11 w-full justify-center gap-2 font-medium sm:w-auto"
                 style={{ backgroundColor: ACCENT, color: "#ffffff" }}
               >
                 Join the waitlist
@@ -277,7 +277,7 @@ export default function WaitlistLandingPage({
               <Button
                 variant="outline"
                 onPress={scrollToWaitlist}
-                className="h-11 gap-2 border-white/20 font-normal"
+                className="h-11 w-full justify-center gap-2 border-white/20 font-normal sm:w-auto"
                 style={{ color: "#a8d5b5" }}
               >
                 Learn more
@@ -303,9 +303,9 @@ export default function WaitlistLandingPage({
 
       <section
         id="waitlist"
-        className="flex h-screen w-screen flex-col justify-center bg-white px-10"
+        className="flex min-h-[100svh] w-full flex-col justify-center bg-white px-6 py-16 sm:px-8 md:px-10"
       >
-        <div className="mx-auto w-3/4">
+        <div className="mx-auto w-full max-w-md">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/trail.png" alt="NexTrails" className="mb-6 h-12 w-auto" />
 
