@@ -241,8 +241,8 @@ function StatsIllustration() {
   const barW = 18;
   const barGap = 6;
   const chartX = 20;
-  const chartY = 160;
-  const chartH = 60;
+  const chartY = 212;
+  const chartH = 48;
   return (
     <svg
       viewBox="0 0 360 260"
@@ -342,10 +342,10 @@ const FEATURE_SECTIONS = [
   {
     eyebrow: "Your stats",
     heading: "See how far you've actually come.",
-    body: "Total distance, elevation gained, trails completed, longest hike, most active month — it's all tracked automatically. Watch the numbers grow over weeks, months, and years. Your hike history, laid out honestly.",
+    body: "Total distance, elevation gained, trails completed, longest hike, most active month. Watch the numbers grow over weeks, months, and years.",
     bullets: [
       "Total distance and elevation logged over your lifetime",
-      "Monthly activity chart — see your patterns at a glance",
+      "Monthly activity chart",
       "Trails completed, unique regions visited, longest streak",
       "Year-over-year comparison so progress feels real",
     ],
@@ -526,7 +526,7 @@ function SocialSection() {
             className="mt-4 text-[14px] leading-relaxed"
             style={{ color: "#7a9e87" }}
           >
-            Follow local hikers, see what trails they're hitting, and share your own adventures. A feed built around people who actually hike in NL — not influencers, not ads.
+            Follow local hikers, see what trails they're hitting, and share your own adventures. A feed built around people who actually hike in NL.
           </p>
           <ul className="mt-6 space-y-2.5">
             {[
