@@ -619,6 +619,10 @@ export default function WaitlistLandingPage({
     document.getElementById("waitlist")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToFeatures = () => {
+    document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
@@ -746,7 +750,7 @@ export default function WaitlistLandingPage({
             </Button>
             <Button
               variant="outline"
-              onPress={scrollToWaitlist}
+              onPress={scrollToFeatures}
               className="h-11 w-full justify-center gap-2 border-white/20 font-normal sm:w-auto"
               style={{ color: "#a8d5b5" }}
             >
@@ -760,9 +764,11 @@ export default function WaitlistLandingPage({
       </section>
 
       {/* ── Feature sections ── */}
-      {FEATURE_SECTIONS.map((section) => (
-        <FeatureSection key={section.eyebrow} {...section} />
-      ))}
+      <div id="features">
+        {FEATURE_SECTIONS.map((section) => (
+          <FeatureSection key={section.eyebrow} {...section} />
+        ))}
+      </div>
 
       {/* ── Regions ── */}
       <SocialSection />
