@@ -235,14 +235,14 @@ function CheckpointsIllustration() {
   );
 }
 
-/** Competitive: leaderboard + streak UI */
-function CompetitiveIllustration() {
-  const entries = [
-    { rank: 1, name: "Sarah K.", km: "64 km", isYou: false },
-    { rank: 2, name: "You", km: "51 km", isYou: true },
-    { rank: 3, name: "Mike T.", km: "48 km", isYou: false },
-    { rank: 4, name: "Jordan L.", km: "39 km", isYou: false },
-  ];
+/** Stats profile card illustration */
+function StatsIllustration() {
+  const bars = [38, 55, 42, 70, 61, 83, 74, 90, 68, 95, 78, 100];
+  const barW = 18;
+  const barGap = 6;
+  const chartX = 20;
+  const chartY = 160;
+  const chartH = 60;
   return (
     <svg
       viewBox="0 0 360 260"
@@ -251,44 +251,57 @@ function CompetitiveIllustration() {
       aria-hidden="true"
     >
       <rect width="360" height="260" rx="12" fill="#f7f5f0" />
-      {/* Header */}
-      <text x="20" y="36" fill="#1a2e1f" fontSize="13" fontWeight="600" fontFamily="sans-serif">Weekly leaderboard</text>
-      <text x="20" y="52" fill="#6b7c71" fontSize="10" fontFamily="sans-serif">Resets Monday · Among friends</text>
-      <rect x="20" y="60" width="320" height="0.5" fill="#d8d0c0" />
-      {/* Leaderboard rows */}
-      {entries.map(({ rank, name, km, isYou }, i) => {
-        const y = 72 + i * 42;
-        const isFirst = rank === 1;
+
+      {/* Profile header */}
+      <circle cx="36" cy="36" r="18" fill="rgba(82,176,122,0.15)" stroke="rgba(82,176,122,0.4)" strokeWidth="1" />
+      <text x="36" y="41" fill="#2d6a4f" fontSize="13" fontWeight="600" fontFamily="sans-serif" textAnchor="middle">NL</text>
+      <text x="64" y="32" fill="#1a2e1f" fontSize="13" fontWeight="600" fontFamily="sans-serif">Neil L.</text>
+      <text x="64" y="47" fill="#6b7c71" fontSize="10" fontFamily="sans-serif">Hiking since 2021</text>
+
+      <rect x="20" y="64" width="320" height="0.5" fill="#e0d8cc" />
+
+      {/* Big stat cards */}
+      {[
+        { x: 20,  label: "Distance", value: "312 km" },
+        { x: 130, label: "Elevation", value: "14,820 m" },
+        { x: 240, label: "Trails", value: "38" },
+      ].map(({ x, label, value }) => (
+        <g key={label}>
+          <rect x={x} y="76" width="100" height="56" rx="8" fill="white" stroke="#e0d8cc" strokeWidth="0.5" />
+          <text x={x + 50} y="102" fill="#1a2e1f" fontSize="16" fontWeight="600" fontFamily="sans-serif" textAnchor="middle">{value}</text>
+          <text x={x + 50} y="118" fill="#6b7c71" fontSize="9" fontFamily="sans-serif" textAnchor="middle">{label}</text>
+        </g>
+      ))}
+
+      {/* Section label */}
+      <text x="20" y="153" fill="#a39b88" fontSize="9" fontFamily="sans-serif" fontWeight="500">MONTHLY DISTANCE (KM)</text>
+
+      {/* Bar chart */}
+      {bars.map((pct, i) => {
+        const bx = chartX + i * (barW + barGap);
+        const bh = (pct / 100) * chartH;
+        const by = chartY - bh;
+        const isLast = i === bars.length - 1;
         return (
-          <g key={rank}>
-            <rect
-              x="20" y={y} width="320" height="34" rx="8"
-              fill={isYou ? "rgba(82,176,122,0.12)" : "transparent"}
-              stroke={isYou ? "rgba(82,176,122,0.3)" : "transparent"}
-              strokeWidth="0.5"
+          <g key={i}>
+            <rect x={bx} y={by} width={barW} height={bh} rx="3"
+              fill={isLast ? "#52b07a" : "rgba(82,176,122,0.25)"}
             />
-            <text x="38" y={y + 22} fill={isFirst ? "#ba7517" : "#a3a3a3"} fontSize="12" fontWeight="600" fontFamily="sans-serif">{rank}</text>
-            {isFirst && (
-              <text x="38" y={y + 22} dx="-2" dy="-14" fill="#ef9f27" fontSize="11" fontFamily="sans-serif">👑</text>
-            )}
-            <text x="60" y={y + 22} fill={isYou ? "#1a3d2b" : "#1a2e1f"} fontSize="12" fontWeight={isYou ? "600" : "400"} fontFamily="sans-serif">{name}</text>
-            {isYou && (
-              <rect x="98" y={y + 10} width="22" height="14" rx="4" fill="rgba(82,176,122,0.2)" />
-            )}
-            {isYou && (
-              <text x="109" y={y + 21} fill="#2d6a4f" fontSize="8" fontFamily="sans-serif" textAnchor="middle">you</text>
-            )}
-            <text x="316" y={y + 22} fill={isYou ? "#2d6a4f" : "#6b7c71"} fontSize="11" fontFamily="sans-serif" textAnchor="end">{km}</text>
-            {/* Bar */}
-            <rect x="20" y={y + 34} width="320" height="0.5" fill="#e8e0d8" />
           </g>
         );
       })}
-      {/* Streak card */}
-      <rect x="20" y="246" width="152" height="0" rx="8" fill="transparent" />
-      {/* Bottom stats */}
-      <rect x="20" y="242" width="148" height="0.5" fill="#d8d0c0" />
-      <rect x="192" y="242" width="148" height="0.5" fill="#d8d0c0" />
+
+      {/* Month labels */}
+      {["J","F","M","A","M","J","J","A","S","O","N","D"].map((m, i) => (
+        <text key={m + i} x={chartX + i * (barW + barGap) + barW / 2} y={chartY + 14}
+          fill="#a39b88" fontSize="8" fontFamily="sans-serif" textAnchor="middle"
+        >{m}</text>
+      ))}
+
+      {/* This year badge */}
+      <rect x="20" y="232" width="320" height="0.5" fill="#e0d8cc" />
+      <text x="20" y="251" fill="#6b7c71" fontSize="9" fontFamily="sans-serif">This year</text>
+      <text x="340" y="251" fill="#2d6a4f" fontSize="9" fontFamily="sans-serif" fontWeight="500" textAnchor="end">↑ 41% more than last year</text>
     </svg>
   );
 }
@@ -327,16 +340,16 @@ const FEATURE_SECTIONS = [
     accentColor: "#52b07a",
   },
   {
-    eyebrow: "Compete",
-    heading: "Your friends are already ahead. For now.",
-    body: "Weekly distance leaderboards reset every Monday so anyone can take the top spot. Climb rank tiers from Bronze to Trailblazer. Challenge friends on a specific trail. Seasonal challenges push you to hike through every corner of NL.",
+    eyebrow: "Your stats",
+    heading: "See how far you've actually come.",
+    body: "Total distance, elevation gained, trails completed, longest hike, most active month — it's all tracked automatically. Watch the numbers grow over weeks, months, and years. Your hike history, laid out honestly.",
     bullets: [
-      "Weekly friend leaderboards — resets Monday",
-      "Seasonal rank tiers: Bronze → Silver → Gold → Trailblazer",
-      "Trail-specific summit boards and fastest-time records",
-      "Direct challenges: race a friend to any summit",
+      "Total distance and elevation logged over your lifetime",
+      "Monthly activity chart — see your patterns at a glance",
+      "Trails completed, unique regions visited, longest streak",
+      "Year-over-year comparison so progress feels real",
     ],
-    Illustration: CompetitiveIllustration,
+    Illustration: StatsIllustration,
     imageRight: false,
     bg: "#ffffff",
     accentColor: "#52b07a",
@@ -425,90 +438,123 @@ function FeatureSection({
 
 // ─── Regional pride section ───────────────────────────────────────────────────
 
-const NL_REGIONS = [
-  { name: "Gros Morne", trails: 47, icon: "🏔" },
-  { name: "Avalon Peninsula", trails: 63, icon: "🌊" },
-  { name: "Labrador", trails: 28, icon: "🌲" },
-  { name: "Bonavista", trails: 34, icon: "🦅" },
-  { name: "Fogo Island", trails: 19, icon: "🪨" },
-  { name: "Cape St. Mary's", trails: 12, icon: "🐦" },
-];
-
-function RegionCard({ name, trails, icon }: { name: string; trails: number; icon: string }) {
+function SocialIllustration() {
   return (
-    <div
-      className="flex flex-col gap-3 rounded-xl p-5"
-      style={{
-        background: "#f7f5f0",
-        border: "0.5px solid #e0d8cc",
-      }}
+    <svg
+      viewBox="0 0 360 260"
+      fill="none"
+      className="h-full w-full"
+      aria-hidden="true"
     >
-      <span className="text-2xl" aria-hidden="true">
-        {icon}
-      </span>
-      <div>
-        <p className="text-[14px] font-medium" style={{ color: "#1a2e1f" }}>
-          {name}
-        </p>
-        <p className="mt-0.5 text-[11px]" style={{ color: "#6b7c71" }}>
-          {trails} trails
-        </p>
-      </div>
-    </div>
+      <rect width="360" height="260" rx="12" fill="#0f1a12" />
+
+      {/* Post card 1 */}
+      <rect x="20" y="16" width="220" height="108" rx="10" fill="#1a2e1f" stroke="#2d4a35" strokeWidth="0.5" />
+      <rect x="20" y="16" width="220" height="64" rx="10" fill="#2d4a35" />
+      <rect x="20" y="60" width="220" height="20" fill="#2d4a35" />
+      <path d="M20 58 Q80 44 130 50 Q180 56 240 46 L240 80 L20 80Z" fill="#1e3d26" />
+      <path d="M60 58 Q75 48 90 52 Q105 56 115 50 Q125 44 135 50 L135 58Z" fill="#162d1c" />
+      <circle cx="36" cy="92" r="10" fill="#2d6a4f" stroke="#0f1a12" strokeWidth="1.5" />
+      <text x="36" y="96" fill="#a8d5b5" fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="600">AJ</text>
+      <text x="52" y="90" fill="#f0ebe0" fontSize="10" fontFamily="sans-serif" fontWeight="500">Alex J.</text>
+      <text x="52" y="102" fill="#6b7c71" fontSize="8" fontFamily="sans-serif">Signal Hill · 2h ago</text>
+      <text x="164" y="102" fill="#52b07a" fontSize="9" fontFamily="sans-serif">♥ 24</text>
+      <text x="198" y="102" fill="#6b7c71" fontSize="9" fontFamily="sans-serif">💬 6</text>
+
+      {/* Post card 2 */}
+      <rect x="20" y="136" width="220" height="108" rx="10" fill="#1a2e1f" stroke="#2d4a35" strokeWidth="0.5" />
+      <rect x="20" y="136" width="220" height="64" rx="10" fill="#243d2a" />
+      <rect x="20" y="176" width="220" height="24" fill="#243d2a" />
+      <path d="M20 168 Q60 158 100 164 Q150 170 240 160 L240 200 L20 200Z" fill="#1a3030" />
+      <path d="M180 158 L200 136 L220 145 L240 136 L240 158Z" fill="#1e3220" />
+      <circle cx="36" cy="212" r="10" fill="#3d5e45" stroke="#0f1a12" strokeWidth="1.5" />
+      <text x="36" y="216" fill="#a8d5b5" fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="600">MR</text>
+      <text x="52" y="210" fill="#f0ebe0" fontSize="10" fontFamily="sans-serif" fontWeight="500">Maya R.</text>
+      <text x="52" y="222" fill="#6b7c71" fontSize="8" fontFamily="sans-serif">Tablelands · 5h ago</text>
+      <text x="164" y="222" fill="#52b07a" fontSize="9" fontFamily="sans-serif">♥ 41</text>
+      <text x="198" y="222" fill="#6b7c71" fontSize="9" fontFamily="sans-serif">💬 9</text>
+
+      {/* Right panel */}
+      <rect x="256" y="16" width="88" height="228" rx="10" fill="#1a2e1f" stroke="#2d4a35" strokeWidth="0.5" />
+      <text x="300" y="36" fill="#6b7c71" fontSize="8" fontFamily="sans-serif" textAnchor="middle">Following</text>
+      <rect x="268" y="42" width="64" height="0.5" fill="#2d4a35" />
+      {([
+        { initials: "TK", name: "Tom K.", action: "logged a hike", y: 60 },
+        { initials: "SR", name: "Sara R.", action: "photo post", y: 100 },
+        { initials: "DJ", name: "Dan J.", action: "new trail", y: 140 },
+        { initials: "KL", name: "Kim L.", action: "logged a hike", y: 180 },
+      ] as { initials: string; name: string; action: string; y: number }[]).map(({ initials, name, action, y }) => (
+        <g key={initials}>
+          <circle cx="276" cy={y + 8} r="8" fill="#2d4a35" />
+          <text x="276" y={y + 12} fill="#a8d5b5" fontSize="6" fontFamily="sans-serif" textAnchor="middle" fontWeight="600">{initials}</text>
+          <text x="290" y={y + 7} fill="#d4d4d4" fontSize="7.5" fontFamily="sans-serif" fontWeight="500">{name}</text>
+          <text x="290" y={y + 17} fill="#6b7c71" fontSize="7" fontFamily="sans-serif">{action}</text>
+        </g>
+      ))}
+    </svg>
   );
 }
 
-function RegionsSection() {
+function SocialSection() {
   return (
     <section
-      className="w-full px-6 py-20 sm:px-8 md:px-10"
+      className="w-full px-6 py-20 sm:px-8 md:px-10 lg:py-28"
       style={{ backgroundColor: "#1a2e1f" }}
     >
-      <div className="mx-auto w-full max-w-5xl">
-        <span
-          className="mb-3 inline-block text-[11px] font-semibold uppercase tracking-widest"
-          style={{ color: "#52b07a" }}
+      <div className="mx-auto grid w-full max-w-5xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div
+          className="relative aspect-[7/5] w-full overflow-hidden rounded-2xl lg:order-last"
+          style={{ border: "0.5px solid rgba(255,255,255,0.07)" }}
         >
-          Built for NL
-        </span>
-        <h2
-          className="font-landing-display max-w-xl text-3xl font-normal leading-tight tracking-tight sm:text-4xl"
-          style={{ color: "#f0ebe0" }}
-        >
-          Every region. Every trail. All in one place.
-        </h2>
-        <p
-          className="mt-4 max-w-lg text-[14px] leading-relaxed"
-          style={{ color: "#7a9e87" }}
-        >
-          NexTrails is built specifically for Newfoundland & Labrador — not a global app where NL is an afterthought. Real local trails, real local hikers, real conditions.
-        </p>
-
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {NL_REGIONS.map((r) => (
-            <RegionCard key={r.name} {...r} />
-          ))}
+          <SocialIllustration />
         </div>
 
-        <div
-          className="mt-12 flex flex-wrap gap-8 border-t pt-10"
-          style={{ borderColor: "#2d4a35" }}
-        >
-          {[
-            { value: "247+", label: "trails mapped" },
-            { value: "6", label: "regions covered" },
-            { value: "Real-time", label: "trail conditions" },
-            { value: "Offline", label: "maps available" },
-          ].map(({ value, label }) => (
-            <div key={label}>
-              <p className="text-lg font-medium" style={{ color: "#f0ebe0" }}>
-                {value}
-              </p>
-              <p className="mt-0.5 text-[11px]" style={{ color: "#6b7c71" }}>
-                {label}
-              </p>
-            </div>
-          ))}
+        <div>
+          <span
+            className="mb-3 inline-block text-[11px] font-semibold uppercase tracking-widest"
+            style={{ color: "#52b07a" }}
+          >
+            Community
+          </span>
+          <h2
+            className="font-landing-display text-3xl font-normal leading-tight tracking-tight sm:text-4xl"
+            style={{ color: "#f0ebe0" }}
+          >
+            Hike together, even when you're apart.
+          </h2>
+          <p
+            className="mt-4 text-[14px] leading-relaxed"
+            style={{ color: "#7a9e87" }}
+          >
+            Follow local hikers, see what trails they're hitting, and share your own adventures. A feed built around people who actually hike in NL — not influencers, not ads.
+          </p>
+          <ul className="mt-6 space-y-2.5">
+            {[
+              "Photo posts with trail tags, conditions, and difficulty",
+              "Follow friends and see their hikes in real time",
+              "Trail stories — ephemeral 24hr posts from the trail",
+              "Activity feed so you never miss a hike in your circle",
+            ].map((b) => (
+              <li
+                key={b}
+                className="flex items-start gap-2.5 text-[13px] leading-snug"
+                style={{ color: "#7a9e87" }}
+              >
+                <span
+                  className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
+                  style={{
+                    background: "rgba(82,176,122,0.15)",
+                    border: "0.5px solid rgba(82,176,122,0.35)",
+                  }}
+                >
+                  <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
+                    <path d="M1 4L3.5 6.5L9 1" stroke="#52b07a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                {b}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -529,7 +575,7 @@ function CtaStrip({ onJoin }: { onJoin: () => void }) {
             className="font-landing-display text-2xl font-normal"
             style={{ color: "#1a2e1f" }}
           >
-            Ready to start your Trailbook?
+            Ready to start your next trail?
           </h2>
           <p className="mt-1 text-[13px]" style={{ color: "#6b7c71" }}>
             Free early access for everyone on the waitlist.
@@ -719,7 +765,7 @@ export default function WaitlistLandingPage({
       ))}
 
       {/* ── Regions ── */}
-      <RegionsSection />
+      <SocialSection />
 
       {/* ── CTA strip ── */}
       <CtaStrip onJoin={scrollToWaitlist} />
