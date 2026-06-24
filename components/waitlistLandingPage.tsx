@@ -79,28 +79,6 @@ function PulseDot() {
   );
 }
 
-function CheckIcon() {
-  return (
-    <span
-      className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
-      style={{
-        background: "rgba(82,176,122,0.18)",
-        border: "0.5px solid rgba(82,176,122,0.45)",
-      }}
-    >
-      <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
-        <path
-          d="M1 4L3.5 6.5L9 1"
-          stroke="#52b07a"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    </span>
-  );
-}
-
 // ─── Feature section illustrations ───────────────────────────────────────────
 
 /** Trailbook: minimalist map with traced routes filling in */
@@ -406,27 +384,11 @@ function FeatureSection({
             {bullets.map((b) => (
               <li
                 key={b}
-                className="flex items-start gap-2.5 text-[13px] leading-snug"
+                className="flex items-start gap-2 text-[13px] leading-snug"
                 style={{ color: "#4a5e52" }}
               >
-                <span
-                  className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
-                  style={{
-                    background: "rgba(82,176,122,0.15)",
-                    border: "0.5px solid rgba(82,176,122,0.4)",
-                  }}
-                >
-                  <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
-                    <path
-                      d="M1 4L3.5 6.5L9 1"
-                      stroke={accentColor}
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                {b}
+                <span className="shrink-0">-</span>
+                <span>{b}</span>
               </li>
             ))}
           </ul>
@@ -537,21 +499,11 @@ function SocialSection() {
             ].map((b) => (
               <li
                 key={b}
-                className="flex items-start gap-2.5 text-[13px] leading-snug"
+                className="flex items-start gap-2 text-[13px] leading-snug"
                 style={{ color: "#7a9e87" }}
               >
-                <span
-                  className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
-                  style={{
-                    background: "rgba(82,176,122,0.15)",
-                    border: "0.5px solid rgba(82,176,122,0.35)",
-                  }}
-                >
-                  <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
-                    <path d="M1 4L3.5 6.5L9 1" stroke="#52b07a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </span>
-                {b}
+                <span className="shrink-0">-</span>
+                <span>{b}</span>
               </li>
             ))}
           </ul>
@@ -665,23 +617,9 @@ function LegacyAccessSection({ onJoinLegacy }: { onJoinLegacy: () => void }) {
               </p>
               <ul className="space-y-4">
                 {LEGACY_BENEFITS.map(({ label, desc }) => (
-                  <li key={label} className="flex items-start gap-3">
-                    <span
-                      className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
-                      style={{
-                        background: "rgba(82,176,122,0.18)",
-                        border: "0.5px solid rgba(82,176,122,0.45)",
-                      }}
-                    >
-                      <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
-                        <path
-                          d="M1 4L3.5 6.5L9 1"
-                          stroke="#52b07a"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                  <li key={label} className="flex items-start gap-2">
+                    <span className="shrink-0 text-[13px]" style={{ color: "#7a9e87" }}>
+                      -
                     </span>
                     <div>
                       <span className="text-[13px] font-medium" style={{ color: "#f0ebe0" }}>
@@ -867,11 +805,11 @@ export default function WaitlistLandingPage({
             {FEATURES.map((f) => (
               <li
                 key={f}
-                className="flex items-start gap-2.5 text-[12.5px] leading-snug"
+                className="flex items-start gap-2 text-[12.5px] leading-snug"
                 style={{ color: "#d4d4d4" }}
               >
-                <CheckIcon />
-                {f}
+                <span className="shrink-0">-</span>
+                <span>{f}</span>
               </li>
             ))}
           </ul>
