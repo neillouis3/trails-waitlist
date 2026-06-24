@@ -593,6 +593,161 @@ function CtaStrip({ onJoin }: { onJoin: () => void }) {
   );
 }
 
+// ─── Legacy Access section ────────────────────────────────────────────────────
+
+const LEGACY_BENEFITS = [
+  { label: "Lifetime subscription", desc: "Pay once, access forever. No renewals, no price increases." },
+  { label: "Early access", desc: "New and paid features before they go public." },
+  { label: "Beta access", desc: "Try experimental features as we build them." },
+  { label: "Priority support", desc: "Faster response times from our team." },
+  { label: "Legacy Access badge", desc: "A permanent mark on your profile as one of the originals." },
+];
+
+function LegacyAccessSection({ onJoinLegacy }: { onJoinLegacy: () => void }) {
+  return (
+    <section
+      className="w-full px-6 py-20 sm:px-8 md:px-10 lg:py-28"
+      style={{ backgroundColor: "#0f1a12" }}
+    >
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="mb-12 max-w-2xl">
+          <span
+            className="mb-3 inline-block text-[11px] font-semibold uppercase tracking-widest"
+            style={{ color: "#52b07a" }}
+          >
+            Legacy Access
+          </span>
+          <h2
+            className="font-landing-display text-3xl font-normal leading-tight tracking-tight sm:text-4xl"
+            style={{ color: "#f0ebe0" }}
+          >
+            Be part of how this started.
+          </h2>
+          <p className="mt-4 text-[14px] leading-relaxed" style={{ color: "#7a9e87" }}>
+            Every great trail starts somewhere, and you&apos;re at the beginning of ours. NexTrails is a
+            community built by hikers, for hikers. Our Legacy Access members are helping us build this
+            platform from the ground up. By joining early, you&apos;re not just getting a subscription —
+            you&apos;re helping shape what NexTrails becomes. Your access never expires, no matter where
+            the trail takes you.
+          </p>
+        </div>
+
+        <div
+          className="relative overflow-hidden rounded-2xl p-8 sm:p-10"
+          style={{
+            background: "linear-gradient(135deg, #1a2e1f 0%, #142318 100%)",
+            border: "0.5px solid rgba(82,176,122,0.25)",
+          }}
+        >
+          <svg
+            className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.07]"
+            viewBox="0 0 800 300"
+            preserveAspectRatio="xMidYMid slice"
+            aria-hidden="true"
+          >
+            <path
+              d="M0 240 C120 200 140 140 220 120 C300 100 340 150 420 128 C500 106 520 60 620 48 C700 38 740 70 800 60"
+              fill="none"
+              stroke="#52b07a"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeDasharray="1 10"
+            />
+          </svg>
+
+          <div className="relative z-10 grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <div>
+              <p
+                className="mb-5 text-[11px] font-semibold uppercase tracking-widest"
+                style={{ color: "#52b07a" }}
+              >
+                What you get
+              </p>
+              <ul className="space-y-4">
+                {LEGACY_BENEFITS.map(({ label, desc }) => (
+                  <li key={label} className="flex items-start gap-3">
+                    <span
+                      className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full"
+                      style={{
+                        background: "rgba(82,176,122,0.18)",
+                        border: "0.5px solid rgba(82,176,122,0.45)",
+                      }}
+                    >
+                      <svg width="8" height="7" viewBox="0 0 10 8" fill="none">
+                        <path
+                          d="M1 4L3.5 6.5L9 1"
+                          stroke="#52b07a"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    <div>
+                      <span className="text-[13px] font-medium" style={{ color: "#f0ebe0" }}>
+                        {label}
+                      </span>
+                      <span className="text-[13px]" style={{ color: "#7a9e87" }}>
+                        {" "}
+                        — {desc}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div
+              className="rounded-xl p-6 sm:p-8"
+              style={{ background: "rgba(0,0,0,0.3)", border: "0.5px solid rgba(82,176,122,0.15)" }}
+            >
+              <div
+                className="mb-5 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-medium"
+                style={{
+                  background: "rgba(82,176,122,0.12)",
+                  border: "0.5px solid rgba(82,176,122,0.3)",
+                  color: "#52b07a",
+                }}
+              >
+                <span>✦</span>
+                <span>Limited founding spots</span>
+              </div>
+
+              <p className="mb-1 text-[12px] uppercase tracking-widest" style={{ color: "#6b7c71" }}>
+                One-time payment
+              </p>
+              <div className="mb-1 flex items-end gap-2">
+                <span className="text-4xl font-semibold" style={{ color: "#f0ebe0" }}>
+                  $4.99
+                </span>
+                <span className="mb-1 text-[13px]" style={{ color: "#6b7c71" }}>
+                  one time
+                </span>
+              </div>
+              <p className="mb-6 text-[12px]" style={{ color: "#52b07a" }}>
+                Lifetime access, no renewals ever.
+              </p>
+
+              <Button
+                onPress={onJoinLegacy}
+                fullWidth
+                className="h-11 font-medium"
+                style={{ backgroundColor: "#52b07a", color: "#ffffff" }}
+              >
+                Claim Legacy Access
+              </Button>
+
+              <p className="mt-3 text-center text-[11px]" style={{ color: "#4a6355" }}>
+                Spots are limited. Price goes up at launch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export default function WaitlistLandingPage({
@@ -770,11 +925,16 @@ export default function WaitlistLandingPage({
         ))}
       </div>
 
-      {/* ── Regions ── */}
+      {/* ── Community / Social ── */}
       <SocialSection />
 
       {/* ── CTA strip ── */}
       <CtaStrip onJoin={scrollToWaitlist} />
+
+      {/* ── Legacy Access ── */}
+      <div id="legacy">
+        <LegacyAccessSection onJoinLegacy={scrollToWaitlist} />
+      </div>
 
       {/* ── Waitlist form ── */}
       <section
